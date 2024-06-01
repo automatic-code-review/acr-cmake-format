@@ -5,23 +5,31 @@ import subprocess
 
 def review(config):
     path_source = config['path_source']
+    arquivo_config = config['config']
 
     comments = []
 
-    file_path = os.path.join(path_source, 'CMakeLists.txt')
-    if not __run_cmake_format(file_path, config['config']):
-        path_relative = file_path.replace(path_source, "")[1:]
-        comments.append({
-            "id": __generate_md5(file_path),
-            "comment": f"Formatação incorreta no arquivo {path_relative}",
-            "position": {
-                "language": "cmake",
-                "path": path_relative,
-                "startInLine": 1,
-                "endInLine": 1,
-                "snipset": False
-            }
-        })
+    for root, dirs, files in os.walk(path_source):
+        for file in files:
+            file_path = os.path.join(root, file)
+
+            # TODO Suporte .cmake files
+            if not file_path.endswith("CMakeLists.txt"):
+                continue
+
+            if not __run_cmake_format(file_path, arquivo_config):
+                path_relative = file_path.replace(path_source, "")[1:]
+                comments.append({
+                    "id": __generate_md5(file_path),
+                    "comment": f"Formatação incorreta no arquivo {path_relative}",
+                    "position": {
+                        "language": "cmake",
+                        "path": path_relative,
+                        "startInLine": 1,
+                        "endInLine": 1,
+                        "snipset": False
+                    }
+                })
 
     return comments
 
