@@ -1,4 +1,4 @@
-# acr-extension-name
+# acr-cmake-format
 
 Extensão para verificar formatação de arquivo do cmake (CMakeLists.txt e .cmake) usando a ferramenta cmake-format
 
