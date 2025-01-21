@@ -13,8 +13,7 @@ def review(config):
         for file in files:
             file_path = os.path.join(root, file)
 
-            # TODO Suporte .cmake files
-            if not file_path.endswith("CMakeLists.txt"):
+            if not file_path.endswith("CMakeLists.txt") and not file_path.endswith(".cmake"):
                 continue
 
             if not __run_cmake_format(file_path, arquivo_config):
