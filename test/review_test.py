@@ -10,7 +10,12 @@ class MyTestCase(unittest.TestCase):
         comments = [
             {'comment': 'Formatação incorreta no arquivo CMakeLists.txt', 'id': 'eaecb3890e3b098f1213d7762b9015ae',
              'position': {'endInLine': 1, 'language': 'cmake', 'path': 'CMakeLists.txt', 'snipset': False,
-                          'startInLine': 1}}]
+                          'startInLine': 1}},
+
+            {'comment': 'Formatação incorreta no arquivo test.cmake', 'id': '5d6ffea06b57c74f9823a3cdf638a519',
+             'position': {'endInLine': 1, 'language': 'cmake', 'path': 'test.cmake', 'snipset': False,
+                          'startInLine': 1}}
+        ]
 
         self.assertEqual(review.review(config), comments)
 
