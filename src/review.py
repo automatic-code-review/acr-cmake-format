@@ -37,7 +37,13 @@ def __run_cmake_format(file_path, config_file_path):
     comando = ['cmake-format', '-c', config_file_path, '--check', file_path]
     resultado = subprocess.run(comando, capture_output=True, text=True)
 
-    return resultado.returncode == 0
+    if resultado.returncode == 0:
+        return True
+
+    print(f"stderr: {resultado.stderr}")
+    print(f"stdout: {resultado.stdout}")
+
+    return False
 
 
 def __generate_md5(string):
